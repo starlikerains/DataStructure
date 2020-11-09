@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * @date 2020年11月4日
  * @param <AnyType> 可以是任何已定义的数据类型
  */
-public class MyArrayList<AnyType> implements Iterable<AnyType> {
+public class MyArrayList<AnyType> implements Iterable<AnyType>,MyList<AnyType> {
 	private static final int DEFAULT_CAPACITY = 10;//默认容量
 	private int theSize;//表的大小
 	private AnyType [] theItems;//采用泛型数组存储元素
@@ -203,6 +203,33 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 		}
 	}
 	
+	/**
+	 * @Title: IndexOf
+	 * @Description: 返回表中出现的第一个x的下标，若表中不存在x，返回-1
+	 * @param x
+	 * @return int
+	 * @throws 
+	 */
+	public int IndexOf(AnyType x) {
+		for(int i=0;i<size();i++) {
+			if(theItems[i].equals(x))return i;
+		}
+		return -1;
+	}
+	
+	/**
+	 * @Title: lastIndexOf
+	 * @Description: 返回表中出现的最后一个x的下标，若表中不存在x，返回-1
+	 * @param x
+	 * @return int
+	 * @throws 
+	 */
+	public int lastIndexOf(AnyType x) {
+		for(int i=size()-1;i>=0;i--) {
+			if(theItems[i].equals(x))return i;
+		}
+		return -1;
+	}
 	
 	/* (非 Javadoc)
 	 * <p>Title: toString</p>
@@ -226,4 +253,5 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 			sb.append(',').append(' ');
 		}
 	}
+
 }
