@@ -1,7 +1,8 @@
-package Bag;
+package bagPackage;
 
 /**
- * 包是没有特定次序的对象的有限集合。这些对象具有相同或相关的数据类型。包可以含有重复项。
+ * BagInterface是Bag(包)的接口，定义了Bag的基本操作。Bag是一个对象容器，对象之间没有特定次序，且可以存在重复对象。
+ * Bag中的对象具有相同的或相关的数据类型。
  * @ClassName: BagInterface
  * @Description:An interface that describes the operations of a bag of objects. 
  * @author 小尚同学

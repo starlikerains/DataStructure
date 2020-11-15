@@ -1,5 +1,15 @@
-package Bag;
+package bagPackage;
 
+/**
+ * ArrayBag是BagInterface的数组实现，即采用顺序存储结构实现。ArrayBag的容量在初始化之后就被确定了，
+ * 不能对容量进行扩充。
+ * @ClassName: ArrayBag
+ * @Description: ArrayBag是使用数组实现的BagInterface。
+ * @author 小尚同学
+ * @date 2020年11月15日
+ *
+ * @param <T>
+ */
 public class ArrayBag<T> implements BagInterface<T>{
 	private final T[] bag;
 	private int numberOfEntries;
@@ -36,7 +46,6 @@ public class ArrayBag<T> implements BagInterface<T>{
 
 	@Override
 	public int getCurrentSize() {
-		// TODO Auto-generated method stub
 		return numberOfEntries;
 	}
 
@@ -45,11 +54,11 @@ public class ArrayBag<T> implements BagInterface<T>{
 		// TODO Auto-generated method stub
 		return numberOfEntries==0;
 	}
-
+	
 	@Override
 	public boolean add(T newEntry) {
 		// TODO Auto-generated method stub
-		checkInitialization();
+		checkInitialization();//对数组进行操作，需要进行初始化检查
 		boolean result=true;
 		if(isArrayFull()) {
 			result=false;
@@ -60,14 +69,22 @@ public class ArrayBag<T> implements BagInterface<T>{
 		}
 		return result;
 	}
-	
-	
-	
+		
 	//Returns true if the bag is full,or false if not.
 	private boolean isArrayFull() {
 		return numberOfEntries>=bag.length;
 	}
 
+	
+	/*
+	 *  (非 Javadoc)
+	 * 由于包中的对象不存在特定次序，且remove操作的定义是删除未指定的对象
+	 * 因此在实现的时候，每次都删除数组中的最后一个对象，符合定义
+	 * <p>Title: remove</p>
+	 * <p>Description: </p>
+	 * @return
+	 * @see Bag.BagInterface#remove()
+	 */
 	@Override
 	public T remove() {
 		// TODO Auto-generated method stub
@@ -85,6 +102,10 @@ public class ArrayBag<T> implements BagInterface<T>{
 		return anEntry.equals(result);
 	}
 	
+	/*
+	 * 由于包中的对象之间不存在特定顺序，在删除一个对象后，可以直接用数组中的最后一个对象
+	 * 进行填补，这样就不用移动被删除对象后的所有对象，时间复杂度为O(1)
+	 */
 	//Removes and returns the entry at a given array index.
 	//If no such entry exists,return null.
 	//Preconditions:0<=givenIndex<numberOfEntries;
@@ -102,11 +123,11 @@ public class ArrayBag<T> implements BagInterface<T>{
 	
 	private int getIndexOf(T anEntry) {
 		int where=-1;
-		boolean found=false;
+		boolean strillLooking=true;
 		int index=0;
-		while(!found&&(index<numberOfEntries)) {
+		while(!strillLooking&&(index<numberOfEntries)) {
 			if(anEntry.equals(bag[index])) {
-				found=true;
+				strillLooking=false;
 				where=index;
 			}
 			index++;
@@ -125,7 +146,7 @@ public class ArrayBag<T> implements BagInterface<T>{
 	@Override
 	public int getFrequencyOf(T anEntry) {
 		// TODO Auto-generated method stub
-		checkInitialization();
+		checkInitialization();//对数组进行操作，需要进行初始化检查
 		int counter=0;
 		for(int index=0;index<numberOfEntries;index++) {
 			if(anEntry.equals(bag[index])) {
@@ -137,8 +158,7 @@ public class ArrayBag<T> implements BagInterface<T>{
 
 	@Override
 	public boolean contains(T anEntry) {
-		// TODO Auto-generated method stub
-		checkInitialization();
+		checkInitialization();//对数组进行操作，需要进行初始化检查
 		return getIndexOf(anEntry)>-1;
 	}
 
@@ -154,7 +174,10 @@ public class ArrayBag<T> implements BagInterface<T>{
 		}
 		return result;
 	}
-	
+	/*
+	 * 由于黑客可能使用未完成初始化的对象对未初始化好的数组进行操作，造成恶意破坏，
+	 * 因此使checkInitialization来检查对象是否初始化成功来规避这一风险。
+	 */
 	//Throws an exception if this object is not initialized.
 	private void checkInitialization() {
 		if(!initialized)
