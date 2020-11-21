@@ -10,7 +10,7 @@ package bagPackage;
  *
  * @param <T>
  */
-public class ArrayBag<T> implements BagInterface<T>{
+public final class ArrayBag<T> implements BagInterface<T>{
 	private final T[] bag;
 	private int numberOfEntries;
 	private static final int DEFAULT_CAPACITY=25;

@@ -8,6 +8,8 @@ public interface MyList<AnyType>{
 	AnyType set(int idx,AnyType newVal);
 	boolean add(AnyType x);
 	void add(int idx,AnyType x);
+	int IndexOf(AnyType x);
+	int lastIndexOf(AnyType x);
 	AnyType remove(int idx);
 	String toString();
 }

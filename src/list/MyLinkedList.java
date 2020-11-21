@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @param <AnyType> 任意一种已实现的数据类型
  */
-public class MyLinkedList<AnyType> implements Iterable<AnyType> {
+public class MyLinkedList<AnyType>  implements Iterable<AnyType>,MyList<AnyType> {
 	
 	private int theSize;//表中包含元素的数量
 	private int modCount=0;//表进行插入、删除、清空操作的总次数
@@ -267,5 +267,26 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
 			okToRemove=false;//刚访问过的元素已被删除，将OKToRemove置为false
 			expectedModCount++;//因为已知进行过一次删除操作，expectedModcount需要加1
 		}
+	}
+
+	@Override
+	public int IndexOf(AnyType x) {
+		Node<AnyType> obj=beginMarker;
+		for(int i=0;i<size();i++) {
+			obj=obj.next;
+			if(obj.data.equals(x))return i;
+		}
+		return -1;
+	}
+
+	@Override
+	public int lastIndexOf(AnyType x) {
+		// TODO Auto-generated method stub
+		Node<AnyType> obj=endMarker;
+		for(int i=size()-1;i>=0;i--) {
+			obj=obj.prev;
+			if(obj.data.equals(x))return i;
+		}
+		return -1;
 	}
 }

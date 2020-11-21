@@ -12,7 +12,7 @@ import java.util.Arrays;
  *
  * @param <T>
  */
-public class ResizableArrayBag<T> implements BagInterface<T> {
+public final class ResizableArrayBag<T> implements BagInterface<T> {
 	private T[] bag;
 	private int numberOfEntries;
 	private static final int DEFAULT_CAPACITY=25;

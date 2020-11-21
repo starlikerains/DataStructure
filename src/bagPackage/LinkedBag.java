@@ -9,7 +9,7 @@ package bagPackage;
  *
  * @param <T>
  */
-public class LinkedBag<T> implements BagInterface<T> {
+public final class LinkedBag<T> implements BagInterface<T> {
 	private Node firstNode;//指向首节点
 	private int numberOfEntries;
 	
@@ -94,8 +94,8 @@ public class LinkedBag<T> implements BagInterface<T> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		while(!isEmpty())
-			remove();
+		firstNode=null;
+		numberOfEntries=0;
 	}
 
 	@Override
